@@ -5,7 +5,6 @@ import axios from 'axios'
 
 const Formulario = () => {
     //api de la database
-    const URLlocal = 'http://localhost:3001/crear'
     const URL = 'https://backend-pwa-production-82ba.up.railway.app/crear'
     //inicializamos variables vacias para el useState
     const [inputs, setInputs] = useState({
