@@ -1,33 +1,45 @@
+// import dependencies
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-import Error from './pages/Error'
-import { Home } from './pages/Home'
-import About from './pages/About';
-import Productos from './pages/Productos';
-import Formulario from './pages/Formulario';
-import Layout from './components/Layout';
-import Info from './components/Info';
-
+//import components
+import Error from './components/pages/Error'
+import Formulario from './components/pages/Formulario';
+import Navbar from './components/Navbar';
+import Pokemons from './components/PokedexComponents/Pokemons';
+import News from './components/pages/News';
 
 function App() {
-  const [poke, setPoke] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [pokemons, setPokemons] = useState([])
+  const [text, setText] = useState('')
 
 
+useEffect(() => {
+  const getPokemon = async () => {
+        const res = await axios.get('https://backend-pwa-production-82ba.up.railway.app/datos');
+        const data = res.data.datos
+        setPokemons(data)
+        setLoading(false)
+  }
 
+  getPokemon()
+})
 
+// variable de pokemon filtrados
+const FiltredPokes = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(text.toLowerCase()))
 
 
   return (
     <BrowserRouter>
-      <Layout />
+
+    <Navbar />
       <Routes>
-          <Route path='/' element={<Home/>} />    
-          <Route path='*' element={<Error/>} />  
-          <Route path='/about' element={<About/>} /> 
-          <Route path='/api' element={<Info poke={poke} setPoke={setPoke} />} />
-          <Route path='/productos' element={<Productos/>} />
-          <Route path='/formulario' element={<Formulario/>} /> 
+          <Route path='/' index element={loading ? <div class="lds-hourglass"></div> : <Pokemons text={text} setText={setText} pokemons={FiltredPokes}/>}/>  
+          <Route path='*' element={<Error/>} />   
+          <Route path='/formulario' element={<Formulario/>}/> 
+          <Route path='/news' element={<News/>}/> 
       </Routes>
     </BrowserRouter>
   );

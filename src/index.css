@@ -639,6 +639,7 @@ body {
   padding: 0;
   font-family: 'Staatliches', cursive;
   background-image: url(./wallp.png);
+  background-size:auto
 }
 
 code {
@@ -700,6 +701,93 @@ span{
 
 .pk-fstat{
   background-color: white;
-  margin-bottom: 15px;
   padding: 2px;
+  border-radius: 5px;
+}
+
+.anchor{
+  text-decoration: none;
+  color: currentColor;
+}
+
+.anchor:visited{
+  text-decoration: none;
+  color: currentColor;
+}
+
+.anchor:hover{
+  text-decoration: none;
+  color: currentColor;
+}
+
+.filter{
+  width: 800px;
+  height: 40px;
+  margin: 15px 0px;
+  border: 2px solid white;
+}
+
+.filter-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-button{
+  width: 80px;
+  height: 40px;
+  background-color: #2065CF;
+  color: white;
+  border: none;
+}
+
+.logo{
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.lds-hourglass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
+.news-card{
+  margin: 15px 40px;
+}
+
+.news-body{
+  border: black 4px solid;
 }

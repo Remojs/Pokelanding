@@ -1,29 +1,29 @@
 import React from 'react'
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import Logo from '../logo.svg'
+import {Nav, Navbar} from 'react-bootstrap';
 
 const Navbarr = () => {
   return (
-    <Navbar bg="dark" variant="dark">
-      <Container>
-      <Navbar.Brand>
-            <img
-              alt=""
-              src={Logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{' '}
-            REMO Bootstrap
-          </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-      </Container>
-    </Navbar>
+    <Nav className='bg-light'>
+      <Navbar.Brand className='logo'>REMOCODE</Navbar.Brand>
+      <Nav.Item>
+        <Nav.Link href="/" className={({isActive}) => (isActive ? 'link active' : 'link')}> HOME </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/news" className={({isActive}) => (isActive ? 'link active' : 'link')}> News </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/form" className={({isActive}) => (isActive ? 'link active' : 'link')}> Form </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/table" className={({isActive}) => (isActive ? 'link active' : 'link')}> Table </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://backend-pwa-production-82ba.up.railway.app/personas" className={({isActive}) => (isActive ? 'link active' : 'link')}> Entries </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://backend-pwa-production-82ba.up.railway.app/datos" className={({isActive}) => (isActive ? 'link active' : 'link')}> Pokemons </Nav.Link>
+      </Nav.Item>
+    </Nav>
   )
 }
-
 export default Navbarr
