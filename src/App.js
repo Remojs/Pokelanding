@@ -4,11 +4,10 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 //import components
-import Error from './components/pages/Error'
-import Formulario from './components/pages/Formulario';
+import Error from './components/Error'
 import Navbar from './components/Navbar';
 import Pokemons from './components/PokedexComponents/Pokemons';
-import News from './components/pages/News';
+import Detail from './components/Detail/Detail';
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -18,14 +17,12 @@ function App() {
 
 useEffect(() => {
   const getPokemon = async () => {
-        const res = await axios.get('https://backend-pwa-production-82ba.up.railway.app/datos');
-        const data = res.data.datos
+        const { data } = await axios.get('https://gottafetchthemall.onrender.com/pokedex');
         setPokemons(data)
         setLoading(false)
   }
-
   getPokemon()
-})
+}, [])
 
 // variable de pokemon filtrados
 const FiltredPokes = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(text.toLowerCase()))
@@ -37,9 +34,8 @@ const FiltredPokes = pokemons.filter(pokemon => pokemon.name.toLowerCase().inclu
     <Navbar />
       <Routes>
           <Route path='/' index element={loading ? <div class="lds-hourglass"></div> : <Pokemons text={text} setText={setText} pokemons={FiltredPokes}/>}/>  
-          <Route path='*' element={<Error/>} />   
-          <Route path='/formulario' element={<Formulario/>}/> 
-          <Route path='/news' element={<News/>}/> 
+          <Route path='/detail/:id' element={<Detail/>}/>  
+          <Route path='*' element={<Error/>} />    
       </Routes>
     </BrowserRouter>
   );
