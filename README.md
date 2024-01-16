@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# ESPAÑOL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Pokelanding
 
-## Available Scripts
+Este proyecto es una galería interactiva de Pokémon, creada utilizando CSS y React. Además, se integra con mi propia API para obtener los detalles de los Pokémones.
 
-In the project directory, you can run:
+## Características:
 
-### `npm start`
+1. **Galería de Pokémones:** Al abrir la aplicación, verás la lista de los 1010 Pokémones. Desplázate hacia abajo para explorarlos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Detalles de Pokémones:** Haz clic en un Pokémon de la lista para ver sus detalles, incluyendo tipo, habilidades y descripción.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Búsqueda de Pokémones:** Utiliza la barra de búsqueda en la parte superior para buscar un Pokémon específico. Los resultados se actualizarán automáticamente a medida que escribas.
 
-### `npm test`
+## Tecnologías utilizadas:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- HTML, CSS: Para la estructura y el estilo de la página.
+- React: Para construir la interfaz de usuario interactiva y componentizada.
+- API personalizada: Para obtener los detalles de los Pokémones.
+- Git: Para el control de versiones y colaboración.
 
-### `npm run build`
+# ENGLISH
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Pokelanding
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project is an interactive Pokémon gallery, created using CSS and React. It also integrates with my own API to get the Pokémon details.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features:
 
-### `npm run eject`
+1. **Pokémon Gallery:** When you open the application, you will see the list of all 1010 Pokémon. Scroll down to explore them.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Pokémon Details:** Click on a Pokémon in the list to view its details, including type, abilities and description.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Search for Pokémon:** Use the search bar at the top to search for a specific Pokémon. Results will automatically update as you type.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technologies used:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- HTML, CSS: For page structure and styling.
+- React: To build the interactive and componentized user interface.
+- Custom API: To get the Pokémon details.
+- Git: For version control and collaboration.
