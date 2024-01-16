@@ -3,7 +3,7 @@ import Pokemon from './Pokemon'
 import Filtro from './Filtro'
 import { Row } from 'react-bootstrap';
 
-const Pokemons = ({pokemons, text, setText}) => {
+const Pokemons = ({pokemons, text, setText, loadMore}) => {
 
   if(pokemons.length === 0) return(
     <>
@@ -19,7 +19,7 @@ const Pokemons = ({pokemons, text, setText}) => {
   )
 
   return ( 
-    <>
+    <div className='pokebody'>
       <Filtro text={text} setText={setText} />
 
         <Row className='text-center abs-center'>
@@ -28,7 +28,9 @@ const Pokemons = ({pokemons, text, setText}) => {
               <Pokemon  key={pokemon.ID} pokemon={pokemon}/>
             ))}
         </Row>
-    </>
+
+        <button className='loadmore-btn' onClick={loadMore}>Cargar más</button>
+    </div>
     
 
   )

@@ -1,3 +1,7 @@
+::-webkit-scrollbar{
+  display: none;
+}
+
 a {
     text-decoration: none;
 }
@@ -178,7 +182,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Staatliches', cursive;
-  background-image: url(./wallp.png);
+  background-color: #2b9491;
   background-size:auto
 }
 
@@ -443,42 +447,14 @@ tbody{
   text-align: center;
 }
 
-.episodes-btn{
-  width: 40px;
-  height: 40px;
+
+.loadmore-btn{
+  padding: 10px 80px;
   border: none;
-  background-color: initial;
-  cursor: pointer;
-  margin-top: 25px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 15px;
+  margin: 50px 41%;
 }
 
-.episodes{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; 
-  gap: 1rem;
-  padding: 1rem; 
-  color: var(--w);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows:repeat(3, 1fr);
-  grid-gap: 10px;
-  margin-top: 20px;
-}
-
-.stat {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
-  margin: 5px 0;
-}
-
-.span-detail-value{
-  color: red;
-}
 
