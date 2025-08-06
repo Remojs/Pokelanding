@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pokeball 8-bit HD optimizada -->
+  <rect x="1" y="1" width="22" height="22" rx="11" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+  <path d="M1 12h22" stroke="#000000" stroke-width="1"/>
+  <path d="M1 12c0-6.075 4.925-11 11-11s11 4.925 11 11" fill="#dc2626"/>
+  <circle cx="12" cy="12" r="3" fill="#ffffff" stroke="#000000" stroke-width="1"/>
+  <circle cx="12" cy="12" r="1.5" fill="#000000"/>
+  <!-- 8-bit pixel details -->
+  <rect x="5" y="5" width="1" height="1" fill="#ff4444"/>
+  <rect x="18" y="5" width="1" height="1" fill="#ff4444"/>
+  <rect x="5" y="18" width="1" height="1" fill="#cccccc"/>
+  <rect x="18" y="18" width="1" height="1" fill="#cccccc"/>
+</svg>

@@ -1,0 +1,198 @@
+/* Game Boy Header 8-bit styles */
+.header {
+  background: var(--background-color, #2a4a3a);
+  border-bottom: 3px solid var(--primary-color, #4a8a6a);
+  box-shadow: 0 4px 0px var(--dark-color, #1a3a2a);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  position: relative;
+  overflow: visible; /* Cambiar para permitir que el dropdown sea visible */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  background: var(--primary-color, #4a8a6a);
+  border: 2px solid var(--border-color, #6aaa8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: retroGlow 2s ease-in-out infinite;
+  transition: transform 0.1s ease-in-out;
+}
+
+.logoIcon:hover {
+  transform: scale(1.05);
+}
+
+.pokeballIcon {
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: brightness(1.2) contrast(1.1);
+  transition: filter 0.2s ease;
+}
+
+.logoIcon:hover .pokeballIcon {
+  filter: brightness(1.4) contrast(1.2);
+  animation: spin 0.5s ease-in-out;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.titleSection h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--primary-color, #4a8a6a);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.titleSection p {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--border-color, #8aa68a);
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statusIndicator {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: rgba(138, 166, 138, 0.2);
+  border: 2px solid #4a8a6a;
+  padding: 8px 12px;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: #6aaa8a;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.statusText {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #d4f4d4;
+  text-transform: uppercase;
+}
+
+.menuButton {
+  background: transparent;
+  border: 2px solid #4a8a6a;
+  color: #d4f4d4;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.menuButton:hover {
+  background: #4a8a6a;
+  transform: translate(1px, 1px);
+}
+
+.decorativePixels {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  gap: 4px;
+}
+
+.pixel {
+  width: 8px;
+  height: 8px;
+  transition: all 0.3s ease;
+}
+
+.pixelPrimary {
+  background: #4a8a6a;
+}
+
+.pixelAccent {
+  background: #6aaa8a;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Responsive breakpoints */
+@media (min-width: 768px) {
+  .titleSection h1 {
+    font-size: 20px;
+  }
+  
+  .titleSection p {
+    font-size: 10px;
+  }
+  
+  .statusIndicator {
+    display: flex;
+  }
+}
+
+/* 🎮 Ocultar hamburguesa en desktop */
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none;
+  }
+}
+
+@keyframes retroGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(74, 138, 106, 0.5), 0 0 10px rgba(74, 138, 106, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(74, 138, 106, 0.8), 0 0 20px rgba(74, 138, 106, 0.5);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

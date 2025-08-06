@@ -1,0 +1,329 @@
+/* Pokemon Filters 8-bit styles */
+.container {
+  padding: 16px;
+  height: 100%;
+  background: var(--background-color, #2a4a3a);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerTitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--accent-color, #d4f4d4);
+  text-transform: uppercase;
+}
+
+.clearButton {
+  background: transparent;
+  border: 2px solid var(--primary-color, #4a8a6a);
+  color: var(--accent-color, #d4f4d4);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  height: 32px;
+}
+
+.clearButton:hover {
+  background: var(--primary-color, #4a8a6a);
+  transform: translate(1px, 1px);
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.sectionLabel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--border-color, #8aa68a);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px; /* Padding uniforme sin espacio para icono */
+  background: var(--dark-color, #1a3a2a);
+  border: 2px solid var(--primary-color, #4a8a6a);
+  color: var(--accent-color, #d4f4d4);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+}
+
+.searchInput::placeholder {
+  color: var(--border-color, #8aa68a);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--border-color, #6aaa8a);
+  box-shadow: 0 0 0 2px rgba(var(--border-color-rgb, 106, 170, 138), 0.2);
+}
+
+/* 🚀 Icono de lupa eliminado por Maestro Front-End UI */
+
+.separator {
+  height: 2px;
+  background: var(--primary-color, #4a8a6a);
+  margin: 16px 0;
+}
+
+.typesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.typeBadge {
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.typeBadge:hover {
+  transform: translate(1px, 1px);
+  filter: brightness(1.3) saturate(1.4);
+  box-shadow: 
+    0 0 8px currentColor,
+    0 0 16px currentColor;
+}
+
+.typeBadgeSelected {
+  border-color: #6aaa8a;
+  animation: retroGlow 2s ease-in-out infinite;
+}
+
+.typeBadgeUnselected {
+  background: #1a3a2a;
+  color: #8aa68a;
+  border-color: #4a8a6a;
+}
+
+.typeBadgeUnselected:hover {
+  background: #2a4a3a;
+  border-color: #6aaa8a;
+}
+
+/* Pokemon type colors - Updated palette */
+.typeNormal { background-color: #8b7355; color: white; }
+.typeFire { background-color: #e74c3c; color: white; }
+.typeWater { background-color: #3498db; color: white; }
+.typeElectric { background-color: #f1c40f; color: black; }
+.typeGrass { background-color: #27ae60; color: white; }
+.typeIce { background-color: #85c1e9; color: black; }
+.typeFighting { background-color: #a93226; color: white; }
+.typePoison { background-color: #8e44ad; color: white; }
+.typeGround { background-color: #d4ac0d; color: black; }
+.typeFlying { background-color: #9b59b6; color: white; }
+.typePsychic { background-color: #e91e63; color: white; }
+.typeBug { background-color: #7dcea0; color: black; }
+.typeRock { background-color: #a0522d; color: white; }
+.typeGhost { background-color: #6c3483; color: white; }
+.typeDragon { background-color: #5d4e75; color: white; }
+.typeDark { background-color: #515151; color: white; }
+.typeSteel { background-color: #839192; color: white; }
+.typeFairy { background-color: #ff69b4; color: white; }
+
+/* 🎨 Hovers específicos para cada tipo Pokémon */
+.typeNormal:hover { background-color: #BFBFBF !important; box-shadow: 0 0 12px #BFBFBF, 0 0 20px #BFBFBF; }
+.typeFire:hover { background-color: #FF7F00 !important; box-shadow: 0 0 12px #FF7F00, 0 0 20px #FF7F00; }
+.typeWater:hover { background-color: #0080FF !important; box-shadow: 0 0 12px #0080FF, 0 0 20px #0080FF; }
+.typeElectric:hover { background-color: #FFFF00 !important; box-shadow: 0 0 12px #FFFF00, 0 0 20px #FFFF00; }
+.typeGrass:hover { background-color: #00FF00 !important; box-shadow: 0 0 12px #00FF00, 0 0 20px #00FF00; }
+.typeIce:hover { background-color: #80FFFF !important; box-shadow: 0 0 12px #80FFFF, 0 0 20px #80FFFF; }
+.typeFighting:hover { background-color: #FF0000 !important; box-shadow: 0 0 12px #FF0000, 0 0 20px #FF0000; }
+.typePoison:hover { background-color: #8000FF !important; box-shadow: 0 0 12px #8000FF, 0 0 20px #8000FF; }
+.typeGround:hover { background-color: #FFBF00 !important; box-shadow: 0 0 12px #FFBF00, 0 0 20px #FFBF00; }
+.typeFlying:hover { background-color: #80BFFF !important; box-shadow: 0 0 12px #80BFFF, 0 0 20px #80BFFF; }
+.typePsychic:hover { background-color: #FF8080 !important; box-shadow: 0 0 12px #FF8080, 0 0 20px #FF8080; }
+.typeBug:hover { background-color: #80FF00 !important; box-shadow: 0 0 12px #80FF00, 0 0 20px #80FF00; }
+.typeRock:hover { background-color: #BFBF00 !important; box-shadow: 0 0 12px #BFBF00, 0 0 20px #BFBF00; }
+.typeGhost:hover { background-color: #8080FF !important; box-shadow: 0 0 12px #8080FF, 0 0 20px #8080FF; }
+.typeDragon:hover { background-color: #8000FF !important; box-shadow: 0 0 12px #8000FF, 0 0 20px #8000FF; }
+.typeDark:hover { background-color: #404040 !important; box-shadow: 0 0 12px #404040, 0 0 20px #404040; }
+.typeSteel:hover { background-color: #C0C0C0 !important; box-shadow: 0 0 12px #C0C0C0, 0 0 20px #C0C0C0; }
+.typeFairy:hover { background-color: #FF80FF !important; box-shadow: 0 0 12px #FF80FF, 0 0 20px #FF80FF; }
+
+.sortOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sortButton {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 2px solid #4a8a6a;
+  color: #d4f4d4;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  text-align: left;
+}
+
+.sortButton:hover {
+  background: #2a4a3a;
+  transform: translate(1px, 1px);
+}
+
+.sortButtonActive {
+  background: #4a8a6a;
+  color: #1a3a2a;
+}
+
+.activeFiltersSection {
+  margin-top: 16px;
+}
+
+.activeFiltersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.activeFilterBadge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: white;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.activeFilterBadge:hover {
+  opacity: 0.8;
+}
+
+.decoration {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.decorationBar {
+  width: 64px;
+  height: 8px;
+  background: #4a8a6a;
+  border: 2px solid #6aaa8a;
+  animation: retroGlow 2s ease-in-out infinite;
+}
+
+.bottomDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+}
+
+.decorationGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.decorationPixel {
+  height: 8px;
+  animation: pulse 2s infinite;
+}
+
+.decorationPixel:nth-child(3n) {
+  background: #4a8a6a;
+}
+
+.decorationPixel:nth-child(3n + 1) {
+  background: #6aaa8a;
+}
+
+.decorationPixel:nth-child(3n + 2) {
+  background: #8aa68a;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+@keyframes retroGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(74, 138, 106, 0.5), 0 0 10px rgba(74, 138, 106, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(74, 138, 106, 0.8), 0 0 20px rgba(74, 138, 106, 0.5);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Hover effects with official Pokemon type colors */
+.typeBadgeUnselected:hover.typeBadge {
+  transform: translate(1px, 1px);
+  border-color: currentColor;
+}
+
+.typeBadgeUnselected:hover.typeBadge.typeNormal { background-color: #A4ACAF; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typeFire { background-color: #FD7D24; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeWater { background-color: #4592C4; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeElectric { background-color: #EED535; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typeGrass { background-color: #9BCC50; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typeIce { background-color: #51C4E7; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typeFighting { background-color: #D56723; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typePoison { background-color: #B97FC9; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeGround { background-color: #AB9842; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typeFlying { background-color: #3DC7EF; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typePsychic { background-color: #F366B9; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeBug { background-color: #729F3F; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeRock { background-color: #A38C21; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeGhost { background-color: #7B62A3; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeDragon { background-color: #53A4CF; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeDark { background-color: #707070; color: #fff; }
+.typeBadgeUnselected:hover.typeBadge.typeSteel { background-color: #9EB7B8; color: #000; }
+.typeBadgeUnselected:hover.typeBadge.typeFairy { background-color: #FDB9E9; color: #000; }

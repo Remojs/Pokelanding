@@ -1,0 +1,154 @@
+/* Game Boy Sidebar 8-bit styles */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--dark-color-rgb, 26, 58, 42), 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 320px;
+  background: var(--background-color, #2a4a3a);
+  border-right: 3px solid var(--primary-color, #4a8a6a);
+  box-shadow: 4px 0 0px var(--dark-color, #1a3a2a);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 50;
+  overflow-y: auto;
+  position: relative;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.sidebarDesktop {
+  position: relative;
+  transform: translateX(0);
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--primary-color, #3a5a4a);
+  border-bottom: 2px solid var(--border-color, #4a8a6a);
+}
+
+.mobileHeaderTitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--accent-color, #d4f4d4);
+  text-transform: uppercase;
+}
+
+.closeButton {
+  background: transparent;
+  border: 2px solid var(--border-color, #4a8a6a);
+  color: var(--accent-color, #d4f4d4);
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.closeButton:hover {
+  background: #4a8a6a;
+  transform: translate(1px, 1px);
+}
+
+.content {
+  height: 100%;
+  background: #2a4a3a;
+}
+
+.bottomDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+}
+
+.decorationGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.decorationPixel {
+  height: 8px;
+  animation: pulse 2s infinite;
+}
+
+.decorationPixel:nth-child(3n) {
+  background: #4a8a6a;
+}
+
+.decorationPixel:nth-child(3n + 1) {
+  background: #6aaa8a;
+}
+
+.decorationPixel:nth-child(3n + 2) {
+  background: #8aa68a;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+    z-index: 50;
+  }
+  
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .backdrop {
+    display: none;
+  }
+  
+  .mobileHeader {
+    display: none;
+  }
+  
+  .sidebar {
+    position: relative;
+    transform: translateX(0);
+    width: 280px;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
