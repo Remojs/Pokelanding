@@ -1,73 +1,109 @@
-# Welcome to your Lovable project
+# 🎮 Pokelanding
 
-## Project info
+Una Pokédex interactiva con diseño retro de Game Boy, construida con React y estilizada completamente con CSS Modules.
 
-**URL**: https://lovable.dev/projects/53142545-d97a-469a-a9f0-d0e41ce4dab5
+## ✨ Funcionalidades
 
-## How can I edit this code?
+### 🔍 **Búsqueda y Filtrado**
+- **Búsqueda global**: Busca cualquier Pokémon por nombre o número de Pokédex
+- **Filtros por tipo**: 18 tipos de Pokémon disponibles (Fire, Water, Grass, etc.)
+- **Ordenamiento**: Pokédex Number (Low to High / High to Low)
+- **Búsqueda dinámica**: Busca en toda la base de datos, no solo en los Pokémon cargados
 
-There are several ways of editing your application.
+### 🎨 **Sistema de Temas**
+- **9 temas únicos**: Game Boy Clásico, Fuego, Agua, Planta, Eléctrico, Hielo, Psíquico, Fantasma, Dragón
+- **Cambio dinámico**: Todos los colores de la interfaz cambian según el tema seleccionado
+- **Persistencia**: El tema seleccionado se guarda en localStorage
 
-**Use Lovable**
+### 📱 **Interfaz Retro**
+- **Diseño Game Boy**: Inspirado en la estética clásica de Nintendo Game Boy
+- **Efectos 8-bit**: Scanlines, animaciones pixeladas y efectos de glow
+- **Responsive**: Adaptado para móviles y escritorio
+- **Modal de detalles**: Información detallada de cada Pokémon
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/53142545-d97a-469a-a9f0-d0e41ce4dab5) and start prompting.
+### 🚀 **Rendimiento**
+- **Infinite Scroll**: Carga progresiva de Pokémon
+- **Cache inteligente**: 5 minutos de cache para búsquedas
+- **Optimización**: Solo carga datos cuando es necesario
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Tecnologías
 
-**Use your preferred IDE**
+### **Frontend**
+- **React 18.3.1** - Biblioteca principal de UI
+- **Vite 5.4.1** - Build tool y dev server
+- **CSS Modules** - Estilos modulares y aislados
+- **Press Start 2P** - Fuente retro de Google Fonts
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### **Gestión de Estado**
+- **TanStack Query (React Query)** - Manejo de estado del servidor
+- **React Hooks** - Estado local de componentes
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### **Herramientas de Desarrollo**
+- **ESLint** - Linting de código
+- **PostCSS** - Procesamiento de CSS
+- **npm** - Gestor de paquetes
 
-Follow these steps:
+## 🌐 Fuente de Datos
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+Los datos de Pokémon provienen de la API personalizada:
+```
+https://gottafetchthemall.onrender.com
 ```
 
-**Edit a file directly in GitHub**
+### **Endpoints utilizados:**
+- `/pokedex/between?min={id}&max={id}` - Rango de Pokémon
+- `/pokedex/{id}` - Pokémon específico por ID
+- Búsqueda global implementada con filtrado del lado cliente
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### **Datos incluidos:**
+- Información básica: nombre, ID, imagen
+- Estadísticas: altura, peso, habilidades
+- Tipos: primario y secundario
+- Sprites oficiales de alta calidad
 
-**Use GitHub Codespaces**
+## 🚀 Instalación y Uso
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+# Clonar el repositorio
+git clone https://github.com/Remojs/Pokelanding.git
 
-## What technologies are used for this project?
+# Instalar dependencias
+cd Pokelanding
+npm install
 
-This project is built with:
+# Ejecutar en desarrollo
+npm run dev
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Construir para producción
+npm run build
+```
 
-## How can I deploy this project?
+## 📁 Estructura del Proyecto
 
-Simply open [Lovable](https://lovable.dev/projects/53142545-d97a-469a-a9f0-d0e41ce4dab5) and click on Share -> Publish.
+```
+src/
+├── features/pokemon/          # Componentes específicos de Pokémon
+│   ├── PokemonCard.jsx       # Tarjeta individual de Pokémon
+│   ├── PokemonFilters.jsx    # Sistema de filtros y búsqueda
+│   └── PokemonGrid.jsx       # Grid principal con infinite scroll
+├── shared/
+│   ├── components/           # Componentes reutilizables
+│   ├── hooks/               # Custom hooks (usePokemonData)
+│   ├── services/            # API de Pokémon
+│   └── utils/               # Utilidades de transformación
+└── pages/                   # Páginas principales
+    └── Index.jsx            # Página principal
+```
 
-## Can I connect a custom domain to my Lovable project?
+## 🎯 Características Técnicas
 
-Yes, you can!
+- **Arquitectura modular** con separación clara de responsabilidades
+- **Custom hooks** para lógica de negocio reutilizable
+- **Infinite scroll** optimizado para grandes conjuntos de datos
+- **Transformación de datos** para consistencia entre API y UI
+- **Sistema de temas** con variables CSS dinámicas
+- **Responsive design** con CSS Grid y Flexbox
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Desarrollado por [Remojs](https://github.com/Remojs)
