@@ -89,15 +89,15 @@
   display: none;
   align-items: center;
   gap: 8px;
-  background: rgba(138, 166, 138, 0.2);
-  border: 2px solid #4a8a6a;
+  background: rgba(var(--border-color-rgb, 138, 166, 138), 0.2);
+  border: 2px solid var(--primary-color, #4a8a6a);
   padding: 8px 12px;
 }
 
 .statusDot {
   width: 8px;
   height: 8px;
-  background: #6aaa8a;
+  background: var(--border-color, #6aaa8a);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -105,7 +105,7 @@
 .statusText {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
-  color: #d4f4d4;
+  color: var(--accent-color, #d4f4d4);
   text-transform: uppercase;
 }
 

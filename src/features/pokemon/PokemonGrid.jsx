@@ -3,7 +3,7 @@ import { usePokemonData } from '../../shared/hooks/usePokemonData.js';
 import { PokemonCard } from './PokemonCard';
 import styles from './PokemonGrid.module.css';
 
-export const PokemonGrid = ({ searchQuery, selectedTypes }) => {
+export const PokemonGrid = ({ searchQuery, selectedTypes, sortBy }) => {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const observerRef = useRef(null);
 
@@ -14,13 +14,14 @@ export const PokemonGrid = ({ searchQuery, selectedTypes }) => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isUsingSearch,
     isUsingTypeFilter
-  } = usePokemonData(searchQuery, selectedTypes);
+  } = usePokemonData(searchQuery, selectedTypes, sortBy);
 
   // Infinite scroll observer - only for general Pokemon list
   const lastPokemonRef = useCallback((node) => {
     if (isFetchingNextPage) return;
-    if (isUsingTypeFilter) return; // Don't use infinite scroll with type filters
+    if (isUsingSearch || isUsingTypeFilter) return; // Don't use infinite scroll with search or type filters
     if (observerRef.current) observerRef.current.disconnect();
     observerRef.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasNextPage && !searchQuery.trim()) {
@@ -28,7 +29,7 @@ export const PokemonGrid = ({ searchQuery, selectedTypes }) => {
       }
     });
     if (node) observerRef.current.observe(node);
-  }, [isFetchingNextPage, hasNextPage, isUsingTypeFilter, searchQuery, fetchNextPage]);
+  }, [isFetchingNextPage, hasNextPage, isUsingSearch, isUsingTypeFilter, searchQuery, fetchNextPage]);
 
   if (isLoading) {
     return (
@@ -45,9 +46,11 @@ export const PokemonGrid = ({ searchQuery, selectedTypes }) => {
             Loading Pokédex...
           </div>
           <div className={styles.loadingSubtitle}>
-            {isUsingTypeFilter 
-              ? `Searching for ${selectedTypes.join(', ')} type Pokémon...`
-              : "Catching 'em all from the digital world!"
+            {isUsingSearch 
+              ? `Searching for "${searchQuery}"...`
+              : isUsingTypeFilter 
+                ? `Searching for ${selectedTypes.join(', ')} type Pokémon...`
+                : "Catching 'em all from the digital world!"
             }
           </div>
         </div>
@@ -127,7 +130,7 @@ export const PokemonGrid = ({ searchQuery, selectedTypes }) => {
       )}
 
       {/* Loading more indicator - only for infinite scroll */}
-      {isFetchingNextPage && !isUsingTypeFilter && (
+      {isFetchingNextPage && !isUsingSearch && !isUsingTypeFilter && (
         <div className={styles.loadMoreContainer}>
           <div className={styles.loadMoreContent}>
             ⟳

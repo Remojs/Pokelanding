@@ -264,7 +264,7 @@
   cursor: not-allowed;
 }
 
-/* Modal styles */
+/* Modal styles - Fixed colors (no theme) */
 .modal {
   position: fixed;
   top: 0;
@@ -350,7 +350,7 @@
 }
 
 .modalStatValue {
-  color: #4a8a6a;
+  color: #d4f4d4; /* Changed to light color for better readability */
 }
 
 @keyframes retroGlow {

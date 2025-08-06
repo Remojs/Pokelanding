@@ -6,25 +6,20 @@ import { useMemo } from 'react';
 import { pokemonApi } from '../services/pokemonApi.js';
 import { transformPokemonData } from '../utils/pokemonUtils.js';
 
-export const usePokemonData = (searchQuery, selectedTypes) => {
-  // Query for general Pokemon list (when no type filters)
-  const infiniteQuery = useInfiniteQuery({
-    queryKey: ['pokemon'],
-    queryFn: async ({ pageParam = 0 }) => {
-      const pokemonListData = await pokemonApi.getPokemonList(pageParam, 20);
+export const usePokemonData = (searchQuery, selectedTypes, sortBy) => {
+  // Query for search results (when there's a search query)
+  const searchQuery_trimmed = searchQuery?.trim() || '';
+  
+  const searchResultsQuery = useQuery({
+    queryKey: ['pokemon-search', searchQuery_trimmed],
+    queryFn: async () => {
+      if (!searchQuery_trimmed) return [];
       
-      // Transform the Pokemon data to match component expectations
-      const transformedPokemon = pokemonListData.results.map(transformPokemonData);
-      
-      return {
-        pokemon: transformedPokemon,
-        nextOffset: pageParam + 20,
-        hasMore: pokemonListData.next !== null
-      };
+      const searchResults = await pokemonApi.searchPokemon(searchQuery_trimmed);
+      return searchResults.map(transformPokemonData);
     },
-    getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextOffset : undefined,
-    initialPageParam: 0,
-    enabled: selectedTypes.length === 0, // Only fetch when no type filters
+    enabled: searchQuery_trimmed.length > 0,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
   // Query for Pokemon by specific types
@@ -50,42 +45,89 @@ export const usePokemonData = (searchQuery, selectedTypes) => {
     enabled: selectedTypes.length > 0, // Only fetch when type filters are selected
   });
 
-  // Combine data and apply search filter
-  const filteredPokemon = useMemo(() => {
-    let pokemonToFilter = [];
+  // Query for general Pokemon list (when no search)
+  const infiniteQuery = useInfiniteQuery({
+    queryKey: ['pokemon', sortBy],
+    queryFn: async ({ pageParam = 0 }) => {
+      let pokemonListData;
+      
+      if (sortBy === 'id-desc') {
+        // For descending order, start from the end (1010) and go backwards
+        const startId = Math.max(1, 1010 - pageParam);
+        const endId = Math.max(1, startId - 19); // Get 20 Pokemon going backwards
+        pokemonListData = await pokemonApi.getPokemonList(endId - 1, startId - endId + 1);
+        // Reverse the results to maintain descending order
+        pokemonListData.results = pokemonListData.results.reverse();
+      } else {
+        // For ascending order (default), normal pagination
+        pokemonListData = await pokemonApi.getPokemonList(pageParam, 20);
+      }
+      
+      // Transform the Pokemon data to match component expectations
+      const transformedPokemon = pokemonListData.results.map(transformPokemonData);
+      
+      return {
+        pokemon: transformedPokemon,
+        nextOffset: pageParam + 20,
+        hasMore: sortBy === 'id-desc' ? (1010 - pageParam) > 20 : pokemonListData.next !== null
+      };
+    },
+    getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextOffset : undefined,
+    initialPageParam: 0,
+    enabled: !searchQuery_trimmed && selectedTypes.length === 0, // Only fetch when no search query and no type filters
+  });
 
-    if (selectedTypes.length > 0) {
+  // Apply sorting and combine data
+  const filteredPokemon = useMemo(() => {
+    let pokemonToSort = [];
+
+    if (searchQuery_trimmed) {
+      // Use search results
+      pokemonToSort = searchResultsQuery.data || [];
+    } else if (selectedTypes.length > 0) {
       // Use type-filtered data
-      pokemonToFilter = typeQuery.data || [];
+      pokemonToSort = typeQuery.data || [];
     } else {
       // Use infinite scroll data
-      pokemonToFilter = infiniteQuery.data ? 
+      pokemonToSort = infiniteQuery.data ? 
         infiniteQuery.data.pages.flatMap(page => page.pokemon) : [];
     }
 
-    // Apply search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase().trim();
-      return pokemonToFilter.filter(pokemon => 
-        pokemon.name.toLowerCase().includes(query) ||
-        pokemon.id.toString().includes(query)
-      );
-    }
+    // Apply sorting
+    const sortedPokemon = [...pokemonToSort].sort((a, b) => {
+      switch (sortBy) {
+        case 'id-desc':
+          return b.id - a.id; // High to Low
+        case 'id-asc':
+        default:
+          return a.id - b.id; // Low to High (default)
+      }
+    });
 
-    return pokemonToFilter;
-  }, [infiniteQuery.data, typeQuery.data, searchQuery, selectedTypes]);
+    return sortedPokemon;
+  }, [infiniteQuery.data, searchResultsQuery.data, typeQuery.data, searchQuery_trimmed, selectedTypes, sortBy]);
 
   // Determine loading and error states
-  const isLoading = selectedTypes.length > 0 ? typeQuery.isLoading : infiniteQuery.isLoading;
-  const error = selectedTypes.length > 0 ? typeQuery.error : infiniteQuery.error;
+  const isLoading = searchQuery_trimmed 
+    ? searchResultsQuery.isLoading 
+    : selectedTypes.length > 0 
+      ? typeQuery.isLoading 
+      : infiniteQuery.isLoading;
+      
+  const error = searchQuery_trimmed 
+    ? searchResultsQuery.error 
+    : selectedTypes.length > 0 
+      ? typeQuery.error 
+      : infiniteQuery.error;
 
   return {
     filteredPokemon,
     isLoading,
     error,
     fetchNextPage: infiniteQuery.fetchNextPage,
-    hasNextPage: infiniteQuery.hasNextPage,
+    hasNextPage: !searchQuery_trimmed && selectedTypes.length === 0 && infiniteQuery.hasNextPage,
     isFetchingNextPage: infiniteQuery.isFetchingNextPage,
+    isUsingSearch: !!searchQuery_trimmed,
     isUsingTypeFilter: selectedTypes.length > 0
   };
 };

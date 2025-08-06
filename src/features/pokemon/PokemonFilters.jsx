@@ -7,9 +7,10 @@ export const PokemonFilters = ({
   onSearchChange,
   selectedTypes,
   onTypeToggle,
+  sortBy,
+  onSortChange,
   onClearFilters
 }) => {
-  const [sortBy, setSortBy] = useState('id');
 
   const getTypeClass = (type) => {
     const typeMap = {
@@ -106,13 +107,12 @@ export const PokemonFilters = ({
         </label>
         <div className={styles.sortOptions}>
           {[
-            { value: 'id', label: 'Pokédex Number' },
-            { value: 'name', label: 'Name (A-Z)' },
-            { value: 'type', label: 'Type' }
+            { value: 'id-asc', label: 'Pokédex Number (Low to High)' },
+            { value: 'id-desc', label: 'Pokédex Number (High to Low)' }
           ].map((option) => (
             <button
               key={option.value}
-              onClick={() => setSortBy(option.value)}
+              onClick={() => onSortChange(option.value)}
               className={`${styles.sortButton} ${sortBy === option.value ? styles.sortButtonActive : ''}`}
             >
               {option.label}

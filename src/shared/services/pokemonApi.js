@@ -44,7 +44,7 @@ export const pokemonApi = {
   },
 
   /**
-   * Search Pokemon by name
+   * Search Pokemon by name or ID (improved global search)
    * @param {string} query - Search query
    * @returns {Promise<Array>} Array of matching Pokemon
    */
@@ -52,21 +52,42 @@ export const pokemonApi = {
     try {
       // Try to get by ID first
       if (!isNaN(query)) {
-        const pokemon = await this.getPokemon(query);
-        return [pokemon];
+        try {
+          const pokemon = await this.getPokemon(query);
+          return [pokemon];
+        } catch {
+          // If ID doesn't exist, continue with name search
+        }
       }
       
-      // For name search, we'll get a range and filter
-      // This is a limitation of your API - you might want to add a search endpoint
-      const response = await fetch(`${BASE_URL}/pokedex/between?min=1&max=200`);
-      if (!response.ok) {
-        throw new Error('Failed to search Pokemon');
-      }
-      const data = await response.json();
+      // For name search, we'll search through multiple ranges
+      // to simulate global search with progressive loading
+      const searchPromises = [];
+      const batchSize = 200;
+      const maxSearchRange = 1010;
       
-      return data.filter(pokemon => 
-        pokemon.name.toLowerCase().includes(query.toLowerCase())
-      );
+      // Search in batches
+      for (let offset = 0; offset < maxSearchRange; offset += batchSize) {
+        const min = offset + 1;
+        const max = Math.min(offset + batchSize, maxSearchRange);
+        
+        searchPromises.push(
+          fetch(`${BASE_URL}/pokedex/between?min=${min}&max=${max}`)
+            .then(response => response.ok ? response.json() : [])
+            .then(data => data.filter(pokemon => 
+              pokemon.name.toLowerCase().includes(query.toLowerCase())
+            ))
+            .catch(() => [])
+        );
+      }
+      
+      // Resolve all batches and combine results
+      const batchResults = await Promise.all(searchPromises);
+      const allResults = batchResults.flat();
+      
+      // Sort by ID and limit to 50 results for performance
+      return allResults.sort((a, b) => a.ID - b.ID).slice(0, 50);
+      
     } catch {
       return [];
     }

@@ -19,6 +19,7 @@ const Index = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const [sortBy, setSortBy] = useState('id-asc');
 
   const handleTypeToggle = (type) => {
     setSelectedTypes(prev => 
@@ -31,6 +32,10 @@ const Index = () => {
   const handleClearFilters = () => {
     setSearchQuery('');
     setSelectedTypes([]);
+  };
+
+  const handleSortChange = (newSort) => {
+    setSortBy(newSort);
   };
 
   const handleMenuToggle = () => {
@@ -61,6 +66,8 @@ const Index = () => {
               onSearchChange={setSearchQuery}
               selectedTypes={selectedTypes}
               onTypeToggle={handleTypeToggle}
+              sortBy={sortBy}
+              onSortChange={handleSortChange}
               onClearFilters={handleClearFilters}
             />
 
@@ -69,6 +76,7 @@ const Index = () => {
               <PokemonGrid
                 searchQuery={searchQuery}
                 selectedTypes={selectedTypes}
+                sortBy={sortBy}
               />
             </main>
           </div>

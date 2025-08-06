@@ -120,13 +120,13 @@
 }
 
 .statLabel {
-  color: #8aa68a;
+  color: var(--border-color, #8aa68a);
   display: block;
   margin-bottom: 2px;
 }
 
 .statValue {
-  color: #4a8a6a;
+  color: var(--primary-color, #4a8a6a);
   font-weight: bold;
 }
 

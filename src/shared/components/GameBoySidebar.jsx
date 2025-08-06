@@ -8,6 +8,8 @@ export const GameBoySidebar = ({
   onSearchChange,
   selectedTypes,
   onTypeToggle,
+  sortBy,
+  onSortChange,
   onClearFilters
 }) => {
   return (
@@ -45,6 +47,8 @@ export const GameBoySidebar = ({
             onSearchChange={onSearchChange}
             selectedTypes={selectedTypes}
             onTypeToggle={onTypeToggle}
+            sortBy={sortBy}
+            onSortChange={onSortChange}
             onClearFilters={onClearFilters}
           />
         </div>

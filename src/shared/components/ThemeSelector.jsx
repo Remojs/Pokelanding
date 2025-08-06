@@ -139,6 +139,11 @@ const ThemeSelector = () => {
         document.documentElement.style.setProperty('--dark-color-rgb', `${darkRgb.r}, ${darkRgb.g}, ${darkRgb.b}`);
       }
       
+      const borderRgb = hexToRgb(theme.border);
+      if (borderRgb) {
+        document.documentElement.style.setProperty('--border-color-rgb', `${borderRgb.r}, ${borderRgb.g}, ${borderRgb.b}`);
+      }
+      
       // También actualizar el body para cambios inmediatos
       document.body.setAttribute('data-theme', themeId);
     }
