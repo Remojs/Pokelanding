@@ -1,0 +1,54 @@
+import type { Metadata } from 'next'
+import { Press_Start_2P, DotGothic16 } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
+
+const pressStart = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-pixel',
+})
+
+const dotGothic = DotGothic16({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-dot',
+})
+
+export const metadata: Metadata = {
+  title: 'Retro Pokedex',
+  description: 'A retro 8-bit style Pokemon detail viewer',
+  generator: 'v0.app',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${pressStart.variable} ${dotGothic.variable} font-sans antialiased`}>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  )
+}
