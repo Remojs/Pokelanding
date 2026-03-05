@@ -1,0 +1,447 @@
+/* ===== POKEMON DETAIL - Layout & Animations ===== */
+
+/* Animations */
+@keyframes pixelFadeIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.5); }
+}
+
+@keyframes scanlineMove {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* ===== MODAL OVERLAY ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 12px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (min-width: 480px) {
+  .overlay { padding: 16px; align-items: center; }
+}
+
+/* ===== POSTER WRAPPER ===== */
+.poster {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  animation: pixelFadeIn 0.4s ease-out forwards;
+  margin: auto 0;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 50;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  border: 2px solid currentColor;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.1s;
+}
+.closeButton:hover {
+  opacity: 0.7;
+}
+
+/* ===== SCANLINE OVERLAY ===== */
+.scanlineOverlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0.03;
+}
+.scanlineInner {
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.1) 2px,
+    rgba(255, 255, 255, 0.1) 4px
+  );
+  animation: scanlineMove 8s linear infinite;
+}
+
+/* ===== HALFTONE OVERLAY ===== */
+.halftoneOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* ===== TOP SECTION ===== */
+.topSection {
+  position: relative;
+  z-index: 10;
+  padding: 14px 14px 8px;
+  padding-right: 44px; /* space for close button */
+}
+@media (min-width: 480px) {
+  .topSection { padding: 20px 20px 8px; padding-right: 52px; }
+}
+.pokemonNumber {
+  margin-bottom: 4px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  opacity: 0.6;
+}
+@media (min-width: 480px) {
+  .pokemonNumber { font-size: 10px; }
+}
+.pokemonNameEn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+@media (min-width: 380px) {
+  .pokemonNameEn { font-size: 22px; }
+}
+@media (min-width: 480px) {
+  .pokemonNameEn { font-size: 30px; letter-spacing: -0.05em; }
+}
+@media (min-width: 600px) {
+  .pokemonNameEn { font-size: 38px; }
+}
+.pokemonNameJp {
+  margin-top: 4px;
+  font-size: 15px;
+  opacity: 0.8;
+}
+@media (min-width: 480px) {
+  .pokemonNameJp { font-size: 20px; }
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+.mainContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 600px) {
+  .mainContent { flex-direction: row; }
+}
+
+/* ===== LEFT: IMAGE PANEL ===== */
+.imagePanel {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  min-height: 180px;
+}
+@media (min-width: 480px) {
+  .imagePanel { min-height: 220px; }
+}
+.sunburst {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+}
+.sunburstColorOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+}
+.imageWrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+@media (min-width: 480px) {
+  .imageWrapper { padding: 24px; }
+}
+.pokemonImage {
+  width: 140px;
+  height: 140px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+}
+@media (min-width: 380px) {
+  .pokemonImage { width: 175px; height: 175px; }
+}
+@media (min-width: 480px) {
+  .pokemonImage { width: 210px; height: 210px; }
+}
+@media (min-width: 600px) {
+  .pokemonImage { width: 230px; height: 230px; }
+}
+.pokeballCorner {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10;
+  opacity: 0.2;
+}
+
+/* ===== RIGHT: INFO PANEL ===== */
+.infoPanel {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+}
+@media (min-width: 480px) {
+  .infoPanel { padding: 18px; }
+}
+@media (min-width: 600px) {
+  .infoPanel { width: 240px; padding: 20px; }
+}
+.typeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-width: 2px;
+  border-style: solid;
+  padding: 4px 12px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: rgba(0, 0, 0, 0.3);
+  margin-bottom: 16px;
+}
+.typeBadgeSecondary {
+  font-size: 7px;
+  opacity: 0.6;
+  margin-left: 4px;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  margin-bottom: 16px;
+  opacity: 0.2;
+}
+.physicalInfo {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+.physicalItem {}
+.physicalLabel {
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+  margin-bottom: 2px;
+}
+.physicalValue {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+}
+.abilitySection {
+  margin-bottom: 16px;
+}
+.abilityLabel {
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+  margin-bottom: 4px;
+}
+.abilityValue {
+  font-size: 12px;
+  text-transform: capitalize;
+  opacity: 0.8;
+}
+.pokeballDecoMt {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+  opacity: 0.15;
+}
+
+/* ===== STATS SECTION ===== */
+.statsSection {
+  position: relative;
+  z-index: 10;
+  padding: 14px;
+}
+@media (min-width: 480px) {
+  .statsSection { padding: 20px; }
+}
+.statsHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.statsTitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+.statsDivider {
+  height: 1px;
+  flex: 1;
+  opacity: 0.2;
+}
+
+/* ===== STAT BARS ===== */
+.statBars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.statRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.statLabel {
+  width: 44px;
+  text-align: right;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.statBarTrack {
+  position: relative;
+  height: 12px;
+  flex: 1;
+}
+.statBarFill {
+  height: 100%;
+  transition: width 1s ease-out;
+}
+.statBarPixels {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+.statBarPixelStep {
+  height: 100%;
+  border-right-width: 1px;
+  border-right-style: solid;
+  width: 5%;
+}
+.statValue {
+  width: 28px;
+  text-align: left;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+}
+
+/* ===== STATS TOTAL ===== */
+.statsTotal {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.statsTotalLabel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+}
+.statsTotalValue {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+@media (min-width: 480px) {
+  .footer { padding: 12px 20px; flex-wrap: nowrap; gap: 0; }
+}
+.footerType {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+@media (min-width: 480px) {
+  .footerType { font-size: 8px; letter-spacing: 0.2em; }
+}
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.footerNumber {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* ===== NOISE OVERLAY ===== */
+.noiseOverlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ===== STAR DECORATIONS ===== */
+.star {
+  position: absolute;
+  z-index: 20;
+  animation: starTwinkle 2s ease-in-out infinite;
+}

@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { usePokemonData } from '../../shared/hooks/usePokemonData.js';
 import { PokemonCard } from './PokemonCard';
+import { PokemonDetail } from './PokemonDetail';
 import styles from './PokemonGrid.module.css';
 
 export const PokemonGrid = ({ searchQuery, selectedTypes, sortBy }) => {
@@ -141,35 +142,10 @@ export const PokemonGrid = ({ searchQuery, selectedTypes, sortBy }) => {
 
       {/* Pokemon Detail Modal */}
       {selectedPokemon && (
-        <div className={styles.modal} onClick={() => setSelectedPokemon(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3 className={styles.modalTitle}>
-                {selectedPokemon.name}
-              </h3>
-              <button
-                onClick={() => setSelectedPokemon(null)}
-                className={styles.modalCloseButton}
-              >
-                ✕
-              </button>
-            </div>
-            <div className={styles.modalBody}>
-              <img
-                src={selectedPokemon.image || selectedPokemon.sprites?.other?.['official-artwork']?.front_default || selectedPokemon.sprites?.front_default}
-                alt={selectedPokemon.name}
-                className={styles.modalImage}
-              />
-              <div className={styles.modalStats}>
-                <div><strong className={styles.modalStatLabel}>Height:</strong> <span className={styles.modalStatValue}>{selectedPokemon.height}</span></div>
-                <div><strong className={styles.modalStatLabel}>Weight:</strong> <span className={styles.modalStatValue}>{selectedPokemon.weight}</span></div>
-                {selectedPokemon.ability && (
-                  <div><strong className={styles.modalStatLabel}>Ability:</strong> <span className={styles.modalStatValue}>{selectedPokemon.ability}</span></div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <PokemonDetail
+          pokemon={selectedPokemon}
+          onClose={() => setSelectedPokemon(null)}
+        />
       )}
     </div>
   );
