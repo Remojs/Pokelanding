@@ -36,58 +36,30 @@ export const pokemonApi = {
    * @returns {Promise<Object>} Pokemon data
    */
   async getPokemon(id) {
-    const response = await fetch(`${BASE_URL}/pokedex/${id}`);
+    const response = await fetch(`${BASE_URL}/pokedex/number/${id}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch Pokemon: ${id}`);
     }
-    return response.json();
+    const data = await response.json();
+    return data[0]; // API returns an array with one pokemon
   },
 
   /**
-   * Search Pokemon by name or ID (improved global search)
+   * Search Pokemon by name or ID
    * @param {string} query - Search query
    * @returns {Promise<Array>} Array of matching Pokemon
    */
   async searchPokemon(query) {
     try {
-      // Try to get by ID first
-      if (!isNaN(query)) {
-        try {
-          const pokemon = await this.getPokemon(query);
-          return [pokemon];
-        } catch {
-          // If ID doesn't exist, continue with name search
-        }
+      if (!isNaN(query) && query !== '') {
+        const response = await fetch(`${BASE_URL}/pokedex/number/${query}`);
+        if (response.ok) return response.json(); // already an array
+        return [];
       }
-      
-      // For name search, we'll search through multiple ranges
-      // to simulate global search with progressive loading
-      const searchPromises = [];
-      const batchSize = 200;
-      const maxSearchRange = 1010;
-      
-      // Search in batches
-      for (let offset = 0; offset < maxSearchRange; offset += batchSize) {
-        const min = offset + 1;
-        const max = Math.min(offset + batchSize, maxSearchRange);
-        
-        searchPromises.push(
-          fetch(`${BASE_URL}/pokedex/between?min=${min}&max=${max}`)
-            .then(response => response.ok ? response.json() : [])
-            .then(data => data.filter(pokemon => 
-              pokemon.name.toLowerCase().includes(query.toLowerCase())
-            ))
-            .catch(() => [])
-        );
-      }
-      
-      // Resolve all batches and combine results
-      const batchResults = await Promise.all(searchPromises);
-      const allResults = batchResults.flat();
-      
-      // Sort by ID and limit to 50 results for performance
-      return allResults.sort((a, b) => a.ID - b.ID).slice(0, 50);
-      
+
+      const response = await fetch(`${BASE_URL}/pokedex/name/${encodeURIComponent(query)}`);
+      if (!response.ok) return [];
+      return response.json();
     } catch {
       return [];
     }
@@ -101,20 +73,9 @@ export const pokemonApi = {
    * @returns {Promise<Array>} Array of Pokemon of that type
    */
   async getPokemonByType(type) {
-    try {
-      // Get all Pokemon (this might be expensive, consider adding type endpoint to your API)
-      const response = await fetch(`${BASE_URL}/pokedex/between?min=1&max=1010`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch Pokemon by type: ${type}`);
-      }
-      const data = await response.json();
-      
-      return data.filter(pokemon => 
-        pokemon.first_type === type || pokemon.second_type === type
-      );
-    } catch (error) {
-      throw new Error(`Failed to fetch Pokemon by type: ${type}`);
-    }
+    const response = await fetch(`${BASE_URL}/pokedex/type/${type}`);
+    if (!response.ok) throw new Error(`Failed to fetch Pokemon by type: ${type}`);
+    return response.json();
   }
 };
 
