@@ -52,8 +52,8 @@ export const usePokemonData = (searchQuery, selectedTypes, sortBy) => {
       let pokemonListData;
       
       if (sortBy === 'id-desc') {
-        // For descending order, start from the end (1010) and go backwards
-        const startId = Math.max(1, 1010 - pageParam);
+        // For descending order, start from the end (1025) and go backwards
+        const startId = Math.max(1, 1025 - pageParam);
         const endId = Math.max(1, startId - 19); // Get 20 Pokemon going backwards
         pokemonListData = await pokemonApi.getPokemonList(endId - 1, startId - endId + 1);
         // Reverse the results to maintain descending order
@@ -69,7 +69,7 @@ export const usePokemonData = (searchQuery, selectedTypes, sortBy) => {
       return {
         pokemon: transformedPokemon,
         nextOffset: pageParam + 20,
-        hasMore: sortBy === 'id-desc' ? (1010 - pageParam) > 20 : pokemonListData.next !== null
+        hasMore: sortBy === 'id-desc' ? (1025 - pageParam) > 20 : pokemonListData.next !== null
       };
     },
     getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextOffset : undefined,
