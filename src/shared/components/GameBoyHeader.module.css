@@ -85,6 +85,40 @@
   gap: 16px;
 }
 
+/* Navigation links */
+.nav {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.navLink {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--border-color, #6aaa8a);
+  text-decoration: none;
+  padding: 6px 10px;
+  border: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: var(--primary-color, #4a8a6a);
+  border-color: var(--primary-color, #4a8a6a);
+}
+
+.navLinkActive {
+  color: var(--primary-color, #4a8a6a) !important;
+  border-color: var(--primary-color, #4a8a6a) !important;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
+
 .statusIndicator {
   display: none;
   align-items: center;

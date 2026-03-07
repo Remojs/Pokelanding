@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './GameBoyHeader.module.css';
 import ThemeSelector from './ThemeSelector';
 
 export const GameBoyHeader = ({ onMenuToggle, isMenuOpen }) => {
   const [isGlowing, setIsGlowing] = useState(false);
+  const location = useLocation();
 
   return (
     <header className={`${styles.header} ${styles.scanlines}`}>
@@ -29,6 +31,16 @@ export const GameBoyHeader = ({ onMenuToggle, isMenuOpen }) => {
 
           {/* Right side controls */}
           <div className={styles.rightSection}>
+            {/* Navigation */}
+            <nav className={styles.nav}>
+              <Link to="/" className={`${styles.navLink} ${location.pathname === '/' ? styles.navLinkActive : ''}`}>
+                POKÉDEX
+              </Link>
+              <Link to="/team-builder" className={`${styles.navLink} ${location.pathname === '/team-builder' ? styles.navLinkActive : ''}`}>
+                TEAM BUILDER
+              </Link>
+            </nav>
+
             {/* Theme Selector con z-index alto */}
             <ThemeSelector />
             

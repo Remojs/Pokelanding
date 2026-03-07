@@ -1,0 +1,39 @@
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 2px solid var(--border-color, #6aaa8a);
+  background: var(--dark-color, #1a3a2a);
+}
+
+.backLink {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--border-color, #6aaa8a);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.backLink:hover {
+  color: var(--primary-color, #4a8a6a);
+}
+
+.sep {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--border-color, #6aaa8a);
+}
+
+.current {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--primary-color, #4a8a6a);
+}
