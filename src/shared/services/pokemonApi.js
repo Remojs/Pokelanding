@@ -24,8 +24,8 @@ export const pokemonApi = {
     // Transform to match expected structure
     return {
       results: data,
-      count: 1010, // Total Pokemon count (approximate)
-      next: max < 1010 ? `${BASE_URL}/pokedex/between?min=${max + 1}&max=${max + limit}` : null,
+      count: 1025, // Total Pokemon count
+      next: max < 1025 ? `${BASE_URL}/pokedex/between?min=${max + 1}&max=${max + limit}` : null,
       previous: min > 1 ? `${BASE_URL}/pokedex/between?min=${Math.max(1, min - limit)}&max=${min - 1}` : null
     };
   },
