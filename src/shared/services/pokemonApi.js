@@ -3,7 +3,7 @@
  * Handles all interactions with your custom Pokemon API
  */
 
-const BASE_URL = 'https://gottafetchthemall.onrender.com';
+const BASE_URL = 'https://api.gottefetchthemallapi.site';
 
 export const pokemonApi = {
   /**
